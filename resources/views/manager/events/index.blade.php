@@ -10,6 +10,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <section class="text-gray-600 body-font">
                     <div class="container px-5 py-4 mx-auto">
+                        <button onclick="location.href='{{ route('events.create') }}'" class="flex mb-4 ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">ボタン</button>
                       <div class="w-full mx-auto overflow-auto">
                         <table class="table-auto w-full text-left whitespace-no-wrap">
                           <thead>
@@ -38,8 +39,7 @@
                         </table>
                         {{ $events->links() }}
                       </div>
-                      <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
-                        <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Button</button>
+                      <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">   
                       </div>
                     </div>
                   </section>
