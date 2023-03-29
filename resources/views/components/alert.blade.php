@@ -21,11 +21,6 @@
 
 @if (session('status'))
     <script>
-        toastr.success('{{ session("status") }}');
-    </script>
-@endif
-@if (session('status') === 'alert')
-    <script>
-        toastr.error('{{ session("message") }}');
+       toastr.error('{{ session("status") }}');
     </script>
 @endif
