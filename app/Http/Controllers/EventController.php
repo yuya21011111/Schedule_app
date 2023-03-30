@@ -7,7 +7,8 @@ use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-
+use App\Services\EventService;
+use Database\Seeders\EventSeeder;
 
 class EventController extends Controller
 {
@@ -42,26 +43,19 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        $check = DB::table('events')
-        ->whereDate('start_date',$request['event_date'])
-        ->whereTime('end_date','>=',$request['start_time'])
-        ->whereTime('start_date','<',$request['end_time'])
-        ->exists();
-
+        // イベントの重複チェック
+        $check = EventService::checkEventDuplication(
+            $request['event_date'],$request['start_time'],$request['end_time']);
+        
        if($check) {
         session()->flash('status','この時間帯は既に予約が他に存在しています。');
            return view('manager.events.create');
        }
 
-        $start = $request['event_date'] ." " . $request['start_time'];
-        $startDate = Carbon::createFromFormat(
-            'Y-m-d H:i',$start
-        );
+       $startDate = EventService::joinDateAndTime($request['event_date'],$request['start_time']);
 
-        $end = $request['event_date'] ." " . $request['end_time'];
-        $endDate = Carbon::createFromFormat(
-            'Y-m-d H:i',$end
-        );
+       $endDate = EventService::joinDateAndTime($request['event_date'],$request['end_time']);
+
 
         Event::create([
             'name' => $request['event_name'],
