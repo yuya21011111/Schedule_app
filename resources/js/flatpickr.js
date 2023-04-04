@@ -11,7 +11,7 @@ flatpickr("#event_date",{
 // 30日まで指定可能にする
 flatpickr("#calendar",{
     "locale" : Japanese,
-    minDate: "today",
+    // minDate: "today",
     maxDate: new Date().fp_incr(30)
 });
 
