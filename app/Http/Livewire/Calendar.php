@@ -11,6 +11,8 @@ class Calendar extends Component
     public $currentDate;
     public $currentWeek;
     public $day;
+    public $checkDay;
+    public $dayOfWeek;
     public $sevenDaysLater;
     public $events;
 
@@ -26,9 +28,15 @@ class Calendar extends Component
 
         for($i = 0; $i < 7; $i++) {
             $this->day = Carbon::today()->addDays($i)->format('m月d日');
-            array_push($this->currentWeek,$this->day);
+            $this->checkDay = Carbon::today()->addDays($i)->format('Y-m-d');
+            $this->dayOfWeek = Carbon::today()->addDays($i)->dayName;
+            array_push($this->currentWeek,[
+                'day' => $this->day,
+                'checkDay' => $this->checkDay,
+                'dayOfWeek' => $this->dayOfWeek
+            ]);
         }
-        
+
         // 7日の日付を表示
         // dd($this->currentWeek);
     }
@@ -45,7 +53,13 @@ class Calendar extends Component
 
         for($i = 0; $i < 7; $i++) {
             $this->day = Carbon::parse($this->currentDate)->addDays($i)->format('m月d日');
-            array_push($this->currentWeek,$this->day);
+            $this->checkDay = Carbon::parse($this->currentDate)->addDays($i)->format('Y-m-d');
+            $this->dayOfWeek = Carbon::parse($this->currentDate)->addDays($i)->dayName;
+            array_push($this->currentWeek,[
+               'day' => $this->day,
+               'checkDay' => $this->checkDay,
+               'dayOfWeek' => $this->dayOfWeek
+            ]);
         }
         
     }
