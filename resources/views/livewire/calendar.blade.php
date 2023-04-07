@@ -22,13 +22,13 @@
 
                        @endphp
                        <a href="{{ route('events.detail',['id' => $eventId]) }}">
-                        <div class="py-1 px-2 h-8 border border-gray-200 text-xs bg-blue-100">
+                        <div class="py-1 px-2 h-8 border border-gray-200 text-xs bg-green-100">
                             {{ $eventName }}
                         </div>
                        </a>
                         @if($eventPeriod > 0)
                           @for($k = 0; $k < $eventPeriod; $k++)
-                              <div class="py-1 px-2 h-8 border border-gray-200  bg-blue-100"></div>
+                              <div class="py-1 px-2 h-8 border border-gray-200  bg-green-100"></div>
                           @endfor
                           @php 
                               $j += $eventPeriod

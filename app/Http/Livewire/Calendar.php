@@ -5,6 +5,11 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Carbon\Carbon;
 use App\Services\EventService;
+use Illuminate\Http\Request;
+use App\Models\Event;
+use App\Models\Reservation;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class Calendar extends Component
 {
@@ -37,6 +42,8 @@ class Calendar extends Component
             ]);
         }
 
+        
+
         // 7日の日付を表示
         // dd($this->currentWeek);
     }
@@ -65,6 +72,7 @@ class Calendar extends Component
     }
     public function render()
     {
+        
         return view('livewire.calendar');
     }
 }

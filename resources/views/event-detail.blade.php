@@ -18,7 +18,8 @@
         @endif --}}
         <x-alert status="session('status')" />
 
-        <form method="get" action="{{ route('events.edit',['event' => $event->id]) }}">
+        <form method="post" action="{{ route('events.reserve',['id' => $event->id]) }}">
+            @csrf
 
             <div>
                 <x-label for="event_name" value="イベント名" />
@@ -52,9 +53,24 @@
                     <x-label for="max_people" value="定員数" />
                     {{ $event->max_people }}人
                 </div>
+                <div class="mt-4">
+                    @if($reservedPeople <= 0)
+                        <span class="text-red-500 text-xs">このイベントは満員です。</span>
+                    @else
+                    <x-label for="reserved_people" value="予約人数" />
+                    <select name="reserved_people">
+                        @for($i = 1; $i <= $reservedPeople; $i++)
+                            <option value="{{ $i }}">{{ $i }}</option>
+                        @endfor
+                    </select>
+                    @endif
+                </div>
+                <input type="hidden" name="id" value="{{ $event->id }}">
+                @if($reservedPeople > 0)
                 <x-button class="ml-4">
                     予約
                  </x-button>
+                @endif
             </div>
         </form>
         </div>
