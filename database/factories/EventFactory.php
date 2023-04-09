@@ -19,7 +19,7 @@ class EventFactory extends Factory
         $availableHour = $this->faker->numberBetween(10,23); // 10時〜2時
         $minutes = [0,30]; // 30分単位
         $mKey = array_rand($minutes); // ランダムに取得
-        $addHour = $this->faker->numberBetween(1,4); // イベント時間 1〜4時
+        $addHour = $this->faker->numberBetween(1,3); // イベント時間 1〜4時
 
         $dummyDate = $this->faker->dateTimeThisMonth; // 月をランダムで取得
         $startDate = $dummyDate->setTime($availableHour,$minutes[$mKey]);
