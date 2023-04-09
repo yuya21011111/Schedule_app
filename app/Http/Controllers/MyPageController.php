@@ -26,6 +26,7 @@ class MyPageController extends Controller
         $event = Event::findOrFail($id);
         $reservation = Reservation::where('user_id', '=' , Auth::id())
         ->where('event_id', '=' ,$id)
+        ->latest()
         ->first();
 
         return view('mypage/show',compact('event', 'reservation'));
@@ -34,6 +35,7 @@ class MyPageController extends Controller
     public function cancel($id) {
        $reservation = Reservation::where('user_id', '=', Auth::id())
        ->where('event_id', '=', $id)
+       ->latest()
        ->first();
 
        $reservation->canceled_date = Carbon::now()->format('Y-m-d H:i:s');

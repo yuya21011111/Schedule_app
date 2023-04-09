@@ -54,7 +54,8 @@
                     {{ $event->max_people }}人
                 </div>
                 <div class="mt-4">
-                    @if($reservedPeople <= 0)
+                @if($isReserved === null) <!-- 予約していれば予約人数は表示しない -->
+                    @if($reservedPeople <= 0) <!-- 満員の場合は満員と表示 -->
                         <span class="text-red-500 text-xs">このイベントは満員です。</span>
                     @else
                     <x-label for="reserved_people" value="予約人数" />
@@ -64,7 +65,13 @@
                         @endfor
                     </select>
                     @endif
+                @else
+                    <select>
+                            <option value="-">-</option>
+                    </select>
+                @endif
                 </div>
+                @if($isReserved === null) <!-- 予約済みかの判定 -->
                 <input type="hidden" name="id" value="{{ $event->id }}">
                 @if($reservedPeople > 0)
                 <x-button class="ml-4">
@@ -72,6 +79,9 @@
                  </x-button>
                 @endif
             </div>
+            @else 
+                <span class="text-xs text-red-500">このイベントは既に予約済みです。</span>
+            @endif
         </form>
         </div>
             </div>
